@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: /logo.png
-actionText: 快速上手 →
+actionText: Quick Start →
 actionLink: /guide/
 features:
   - title: 丰富功能
