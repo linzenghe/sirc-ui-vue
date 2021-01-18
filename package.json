@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "serve": "cross-env NODE_ENV=development && vue-cli-service serve --copy",
+    "lib:cli": "cross-env rimraf ./lib && node ./build/cli.build.js",
+    "lib": "cross-env NODE_ENV=production rimraf ./lib && node ./build/rollup.build",
+    "lint:prettier": "cross-env prettier --write \"src/**/*.js\" \"src/**/*.vue\" --loglevel warn",
+    "lint:css": "cross-env  stylelint 'packages/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'examples/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'src/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'docs/.vuepress/**/*.{html,vue,css,less,scss,styl}' --fix",
+    "test:unit": "vue-cli-service test:unit",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "precommit": "lint-staged",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "pub:rollup": "npm run uv && npm run lib && npm publish",
+    "pub:cli": "npm run uv && npm run lib:cli && npm publish",
+    "uv": "cross-env node ./script/update.version.js"
   },
   "dependencies": {
     "ant-design-vue": "^1.7.2",
