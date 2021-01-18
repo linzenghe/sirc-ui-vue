@@ -1,4 +1,3 @@
-
 const pkg =require('../../package.json')
 module.exports = {
   title: pkg.name,
@@ -39,7 +38,7 @@ module.exports = {
         }
       },
       '/en/': {
-        label: 'Englist',
+        label: 'English',
         selectText: 'Languages',
         editLinkText: 'Edit this page on GitHub',
         lastUpdated: 'Last Updated',
@@ -49,17 +48,8 @@ module.exports = {
       }
     },
     nav: [
-      {
-        text: 'Languages',
-        ariaLabel: 'Language Menu',
-        items: [
-          { text: '简体中文', link: '/options' },
-          { text: 'English', link: '/en/options/' }
-        ]
-      },
-      {
-
-      }
+      { text: '首页', link: '/' },
+      { text: 'Github', link: 'https://github.com/linzenghe/sirc-ui-vue' },
     ]
   },
   configureWebpack: {
@@ -83,9 +73,6 @@ function genSidebarConfig (title) {
       collapsable: false,
       children: [
         '',
-        'started',
-        'options',
-        'complex',
       ]
     }
   ]

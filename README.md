@@ -1,24 +1,50 @@
 # sirc-ui-vue
 
-## Project setup
+## 安装依赖
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+yarn install
 ```
 
-### Compiles and minifies for production
+### 运行example
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+yarn run serve
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 运行测试用例
+```
+yarn run test:unit
+```
+
+### 使用vue-cli3 打包库
+```
+yarn run lib:cli
+```
+
+### 使用rollup打包库
+```
+yarn run lib
+```
+
+### 格式化全部js文件
+```
+yarn run lint:prettier
+```
+
+### 格式化全部css文件
+```
+yarn run lint:css
+```
+### 运行项目文档
+```
+yarn run docs:dev
+```
+
+### 打包项目文档
+```
+yarn run docs:build
+```
+
+### 生成修改日志
+```
+yarn run version
+```
