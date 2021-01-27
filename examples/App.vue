@@ -17,8 +17,11 @@
 export default {
   data() {
     return {
-      message: ''
+      message: '12'
     }
+  },
+  created() {
+    console.log(this._.cloneDeep(this.message))
   }
 }
 </script>

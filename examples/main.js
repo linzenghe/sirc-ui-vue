@@ -4,7 +4,10 @@ import router from './router'
 import store from './store'
 
 import sircUI from '@/index' // 引入组件库
-Vue.use(sircUI)
+
+Vue.use(sircUI, {
+  getDictionary(keyList) {}
+})
 Vue.config.productionTip = false
 
 new Vue({

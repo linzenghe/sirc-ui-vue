@@ -24,7 +24,7 @@ import {
   InputNumber,
   Layout,
   List,
-  // LocaleProvider,
+  LocaleProvider,
   Menu,
   // Mentions,
   Modal,
@@ -64,8 +64,11 @@ import {
 } from 'ant-design-vue'
 import Input from '../packages/Input'
 import 'ant-design-vue/dist/antd.css'
-
+import Lodash from './utils/lodashUtil'
 import { version } from '../package.json'
+
+import dictionaryUtil from './utils/DictionaryUtil' // 字典服务
+
 const components = [
   Affix,
   AutoComplete,
@@ -92,7 +95,7 @@ const components = [
   InputNumber,
   Layout,
   List,
-  // LocaleProvider,
+  LocaleProvider,
   Menu,
   // Mentions,
   Modal,
@@ -125,16 +128,17 @@ const components = [
   ConfigProvider,
   Empty,
   Result,
-  Descriptions,
+  Descriptions
   // PageHeader,
-  message,
-  notification
 ]
-const install = function(Vue) {
+const install = function(Vue, opts = {}) {
+  let { getDictionary, store } = opts
   // 判断是否安装
   if (install.installed) {
     return
   }
+  // 加载通用类属性
+  dictionaryUtil.init(getDictionary, store)
   // 加载组件
   components.forEach((component) => {
     Vue.component(component.name, component)
@@ -148,6 +152,9 @@ const install = function(Vue) {
   Vue.prototype.$warning = Modal.warning
   Vue.prototype.$confirm = Modal.confirm
   Vue.prototype.$destroyAll = Modal.destroyAll
+  Vue.use(Lodash)
+
+  Vue.prototype.$dictionary = dictionaryUtil
 }
 
 if (typeof window !== 'undefined' && window.Vue) {

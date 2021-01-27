@@ -1,3 +1,11 @@
+/*
+ * @Author: zenghe
+ * @Date: 2021-01-20 17:10:50
+ * @LastEditTime: 2021-01-27 16:59:19
+ * @LastEditors: Do not edit
+ * @FilePath: \sirc-ui-vue\vue.config.js
+ * @Description:
+ */
 const utils = require('./build/utils.js')
 const { join } = require('path')
 const aliasConfig = require('./config/alias')
@@ -9,6 +17,8 @@ const setAlias = (config) => {
     config.resolve.alias.set(key, alias[key])
   })
 }
+const port = process.env.port || process.env.npm_config_port || 8080 // dev port
+
 module.exports = {
   lintOnSave: !utils.isProduct,
   runtimeCompiler: true,
@@ -28,6 +38,16 @@ module.exports = {
       }
     }
   },
+  devServer: {
+    port: port,
+    open: false,
+    overlay: {
+      warning: false,
+      errors: true
+    },
+    before: require('./mock/mock-server')
+  },
+
   // 扩展 webpack 配置，使 packages 加入编译
   chainWebpack: (config) => {
     config.module
@@ -65,15 +85,6 @@ module.exports = {
   configureWebpack: (config) => {
     if (utils.isProduct) {
       config.externals = externalMap
-    }
-  },
-  devServer: {
-    // 端口号
-    port: 8099,
-    // eslint报错页面会被遮住
-    overlay: {
-      warnings: true,
-      errors: true
     }
   },
   pluginOptions: {
